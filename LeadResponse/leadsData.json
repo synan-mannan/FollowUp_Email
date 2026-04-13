@@ -1,0 +1,124 @@
+{
+  "data": [
+    {
+      "id": 1,
+      "email": "rahul.sharma@gmail.com",
+      "name": "Rahul Sharma",
+      "message": "Hi, my name is Rahul Sharma. I am looking to build a business website for my company. I would like to know your pricing and timelines."
+    },
+    {
+      "id": 2,
+      "email": "anjali.verma@yahoo.com",
+      "name": "Anjali Verma",
+      "message": "Hello, I am Anjali Verma. I have a startup idea and need a mobile app developed. Please let me know how we can proceed."
+    },
+    {
+      "id": 3,
+      "email": "amit.patel@outlook.com",
+      "name": "Amit Patel",
+      "message": "Hi, this is Amit Patel. I already have a website and I am interested in improving its SEO performance. Can you help with that?"
+    },
+    {
+      "id": 4,
+      "email": "sneha.reddy@gmail.com",
+      "name": "Sneha Reddy",
+      "message": "Hello, I am Sneha Reddy. I urgently need an e-commerce website for my business. Please share details about your services and timelines."
+    },
+    {
+      "id": 5,
+      "email": "karan.mehta@gmail.com",
+      "name": "Karan Mehta",
+      "message": "Hi, my name is Karan Mehta. I am exploring options for custom software development and would like to see your portfolio."
+    },
+    {
+      "id": 6,
+      "email": "priya.nair@gmail.com",
+      "name": "Priya Nair",
+      "message": "Hello, I am Priya Nair. My current website is outdated and I am looking for a complete redesign. Please get in touch."
+    },
+    {
+      "id": 7,
+      "email": "vikram.singh@gmail.com",
+      "name": "Vikram Singh",
+      "message": "Hi, I am Vikram Singh. I want to know if you provide digital marketing services and what your pricing looks like."
+    },
+    {
+      "id": 8,
+      "email": "neha.gupta@gmail.com",
+      "name": "Neha Gupta",
+      "message": "Hello, this is Neha Gupta. I am interested in developing a CRM solution for my business. Please share more details."
+    },
+    {
+      "id": 9,
+      "email": "arjun.das@gmail.com",
+      "name": "Arjun Das",
+      "message": "Hi, I am Arjun Das. I need a landing page for an upcoming product launch and would like to get started soon."
+    },
+    {
+      "id": 10,
+      "email": "meera.iyer@gmail.com",
+      "name": "Meera Iyer",
+      "message": "Hello, my name is Meera Iyer. I am looking for UI and UX design services for my application. Please let me know your approach."
+    },
+    {
+      "id": 11,
+      "email": "rohit.jain@gmail.com",
+      "name": "Rohit Jain",
+      "message": "Hi, I am Rohit Jain. I need help building backend APIs for my project. Please share your experience and availability."
+    },
+    {
+      "id": 12,
+      "email": "pooja.kapoor@gmail.com",
+      "name": "Pooja Kapoor",
+      "message": "Hello, this is Pooja Kapoor. I am interested in your services but would like to understand your pricing before proceeding."
+    },
+    {
+      "id": 13,
+      "email": "sahil.khan@gmail.com",
+      "name": "Sahil Khan",
+      "message": "Hi, I am Sahil Khan. I am looking for AI or machine learning solutions for my business and would like to discuss further."
+    },
+    {
+      "id": 14,
+      "email": "divya.bhatt@gmail.com",
+      "name": "Divya Bhatt",
+      "message": "Hello, I am Divya Bhatt. I need a simple portfolio website to showcase my work. Please let me know the process."
+    },
+    {
+      "id": 15,
+      "email": "manish.agarwal@gmail.com",
+      "name": "Manish Agarwal",
+      "message": "Hi, I am Manish Agarwal. I urgently need help fixing bugs in my application. Please contact me as soon as possible."
+    },
+    {
+      "id": 16,
+      "email": "kavya.menon@gmail.com",
+      "name": "Kavya Menon",
+      "message": "Hello, I am Kavya Menon. I am interested in cloud deployment services for my project. Please share your offerings."
+    },
+    {
+      "id": 17,
+      "email": "deepak.yadav@gmail.com",
+      "name": "Deepak Yadav",
+      "message": "Hi, this is Deepak Yadav. I want to know if you provide maintenance services for applications and websites."
+    },
+    {
+      "id": 18,
+      "email": "nisha.arora@gmail.com",
+      "name": "Nisha Arora",
+      "message": "Hello, I am Nisha Arora. I need help with WordPress customization for my website. Please let me know if you can assist."
+    },
+    {
+      "id": 19,
+      "email": "tarun.bansal@gmail.com",
+      "name": "Tarun Bansal",
+      "message": "Hi, I am Tarun Bansal. I am just exploring your services for future use and would like to stay in touch."
+    },
+    {
+      "id": 20,
+      "email": "ritika.sen@gmail.com",
+      "name": "Ritika Sen",
+      "message": "Hello, my name is Ritika Sen. I am looking for a full stack developer for long term collaboration. Please reach out to discuss further."
+    }
+  ]
+}

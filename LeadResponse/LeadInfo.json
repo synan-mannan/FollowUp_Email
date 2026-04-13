@@ -1,0 +1,162 @@
+{
+    "1": {
+        "requirement_clarity": "Clear",
+        "budget_mentioned": "No",
+        "timeline_mentioned": "Yes",
+        "intent": "Exploring",
+        "score": 0,
+        "classification": "Maybe"
+    },
+    "2": {
+        "requirement_clarity": "Unclear",
+        "budget_mentioned": "No",
+        "timeline_mentioned": "No",
+        "intent": "Serious",
+        "score": 0,
+        "classification": "Not Interested"
+    },
+    "3": {
+        "requirement_clarity": "Clear",
+        "budget_mentioned": "No",
+        "timeline_mentioned": "No",
+        "intent": "Serious",
+        "score": 0,
+        "classification": "Maybe"
+    },
+    "4": {
+        "requirement_clarity": "Clear",
+        "budget_mentioned": "No",
+        "timeline_mentioned": "Yes",
+        "intent": "Serious",
+        "score": 2,
+        "classification": "Good Lead"
+    },
+    "5": {
+        "requirement_clarity": "Unclear",
+        "budget_mentioned": "No",
+        "timeline_mentioned": "No",
+        "intent": "Exploring",
+        "score": -2,
+        "classification": "Not Interested"
+    },
+    "6": {
+        "requirement_clarity": "Clear",
+        "budget_mentioned": "No",
+        "timeline_mentioned": "No",
+        "intent": "Serious",
+        "score": 0,
+        "classification": "Maybe"
+    },
+    "7": {
+        "requirement_clarity": "Unclear",
+        "budget_mentioned": "No",
+        "timeline_mentioned": "No",
+        "intent": "Exploring",
+        "score": -2,
+        "classification": "Not Interested"
+    },
+    "8": {
+        "requirement_clarity": "Clear",
+        "budget_mentioned": "No",
+        "timeline_mentioned": "No",
+        "intent": "Serious",
+        "score": 0,
+        "classification": "Maybe"
+    },
+    "9": {
+        "requirement_clarity": "Clear",
+        "budget_mentioned": "No",
+        "timeline_mentioned": "Yes",
+        "intent": "Serious",
+        "score": 2,
+        "classification": "Good Lead"
+    },
+    "10": {
+        "requirement_clarity": "Clear",
+        "budget_mentioned": "No",
+        "timeline_mentioned": "No",
+        "intent": "Exploring",
+        "score": -2,
+        "classification": "Not Interested"
+    },
+    "11": {
+        "requirement_clarity": "Unclear",
+        "budget_mentioned": "No",
+        "timeline_mentioned": "No",
+        "intent": "Exploring",
+        "score": -2,
+        "classification": "Not Interested"
+    },
+    "12": {
+        "requirement_clarity": "Unclear",
+        "budget_mentioned": "No",
+        "timeline_mentioned": "No",
+        "intent": "Exploring",
+        "score": -2,
+        "classification": "Not Interested"
+    },
+    "13": {
+        "requirement_clarity": "Unclear",
+        "budget_mentioned": "No",
+        "timeline_mentioned": "No",
+        "intent": "Exploring",
+        "score": -2,
+        "classification": "Not Interested"
+    },
+    "14": {
+        "requirement_clarity": "Clear",
+        "budget_mentioned": "No",
+        "timeline_mentioned": "No",
+        "intent": "Serious",
+        "score": 0,
+        "classification": "Maybe"
+    },
+    "15": {
+        "requirement_clarity": "Unclear",
+        "budget_mentioned": "No",
+        "timeline_mentioned": "Yes",
+        "intent": "Serious",
+        "score": 2,
+        "classification": "Maybe"
+    },
+    "16": {
+        "requirement_clarity": "Clear",
+        "budget_mentioned": "No",
+        "timeline_mentioned": "No",
+        "intent": "Serious",
+        "score": 0,
+        "classification": "Maybe"
+    },
+    "17": {
+        "requirement_clarity": "Unclear",
+        "budget_mentioned": "No",
+        "timeline_mentioned": "No",
+        "intent": "Exploring",
+        "score": -2,
+        "classification": "Not Interested"
+    },
+    "18": {
+        "requirement_clarity": "Clear",
+        "budget_mentioned": "No",
+        "timeline_mentioned": "No",
+        "intent": "Serious",
+        "score": 0,
+        "classification": "Maybe"
+    },
+    "19": {
+        "requirement_clarity": "Unclear",
+        "budget_mentioned": "No",
+        "timeline_mentioned": "No",
+        "intent": "Exploring",
+        "score": -2,
+        "classification": "Not Interested"
+    },
+    "20": {
+        "requirement_clarity": "Clear",
+        "budget_mentioned": "No",
+        "timeline_mentioned": "No",
+        "intent": "Exploring",
+        "score": -2,
+        "classification": "Not Interested"
+    }
+}
