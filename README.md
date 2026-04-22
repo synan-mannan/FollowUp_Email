@@ -1,120 +1,181 @@
-# FollowUp Email Automation
+# AI-Powered Lead Management System V2
 
-A Python-based CRM system for managing leads: capturing lead details, sending automated Gmail follow-up emails, appending data to Excel and SQLite database, and scoring leads using AI (Groq/Llama LLM) based on customer replies.
+Complete end-to-end system: **FastAPI API** → Gmail send/read → **AI scoring (Groq)** → auto follow-ups → **Streamlit dashboard** + **APScheduler**.
+
+## Architecture Diagram
+
+```
+POST /leads → DB Store + Initial Email (gmail.py)
+      ↓ every 30min (scheduler.py)
+Read Replies (gmail.py) → Score AI (scoring.py) → Decide (followup_engine.py) → Send Follow-up
+      ↕ Live View/Test
+Dashboard (Streamlit) + API (FastAPI)
+```
 
 ## Features
 
-- **Lead Capture**: Interactive CLI input for name, phone, email, requirements; stores in SQLite (`Company.db`).
-- **Automated Email**: Sends personalized follow-up emails via Gmail API.
-- **Excel Integration**: Appends lead data to `excel_path.xlsx`.
-- **AI Lead Scoring**: Analyzes customer reply messages (from `leadsData.json`) to classify leads as "Good", "Maybe", or "Not Interested" with scores based on clarity, budget, timeline, intent.
-- **Database**: Tracks leads and messages in `Company.db`.
+- ✅ **API First**: Create leads, auto-send initial email, list/view
+- ✅ **Gmail Full**: Send templates, read recent replies/threads
+- ✅ **AI Strict JSON**: Groq LLM scores (clarity/budget/timeline/intent/score/classification)
+- ✅ **Smart Follow-ups**: Time-based + score-driven (proposal/nurture/reminder)
+- ✅ **Automation**: Background scheduler runs pipeline continuously
+- ✅ **Dashboard**: Real-time leads table, manual controls, test scoring
+- ✅ **No Manual Steps**: End-to-end connected pipeline
 
-## Project Structure
+## Quick Start (Windows)
 
-```
-FollowUp_Email/
-├── app.py                  # Main CLI app for lead capture, email, Excel/DB ops
-├── Company.db              # SQLite DB for leads &amp; messages
-├── excel_path.xlsx         # Excel sheet for lead export
-├── excel_ops/
-│   └── appendData.py       # Appends data to Excel
-├── Gmail_API_Setup/
-│   ├── first.py            # OAuth setup (run once to generate token.json)
-│   ├── sendMessage.py      # Gmail API email sender
-│   ├── credentials.json    # Gmail API credentials (download from Google Console)
-│   └── token.json          # Generated OAuth token
-└── LeadResponse/
-    ├── LeadExtraction.py   # AI lead scoring from replies using LLM
-    ├── llm.py              # Groq LLM setup
-    ├── LeadInfo.json       # Generated lead scores
-    └── leadsData.json      # Sample reply data
-```
-
-## Prerequisites
-
-- Python 3.8+
-- Gmail API credentials: [Setup Guide](https://developers.google.com/gmail/api/quickstart/python)
-  - Download `credentials.json`.
-- `GROQ_API_KEY` env var for AI scoring.
-- Libraries: `pip install pandas openpyxl sqlite3 langchain-groq google-api-python-client google-auth-oauthlib google-auth-httplib2`
-
-## Quick Start
-
-1. **Gmail Setup** (one-time):
-
-   ```
-   cd Gmail_API_Setup
-   python first.py  # Opens browser for OAuth, generates token.json
-   ```
-
-2. **AI Setup**:
-
-   ```
-   set GROQ_API_KEY=your_key_here  # Windows
-   # export GROQ_API_KEY=your_key_here  # Linux/Mac
-   ```
-
-3. **Run Main App**:
-
-   ```
-   python app.py
-   ```
-
-   - Enter lead details (name, phone, email, requirement).
-   - Automatically: sends email, appends to Excel/DB.
-
-4. **Score Leads** (from replies):
-   ```
-   cd LeadResponse
-   python LeadExtraction.py  # Processes leadsData.json → LeadInfo.json
-   ```
-
-## Usage Example
+1. **Install & Configure**:
 
 ```
-Enter the name: John Doe
-Enter phone number: 1234567890
-Enter Email: john@example.com
-Enter your requirements: Need web dev services
+pip install -r requirements.txt
+copy .env.example .env
 ```
 
-- Email sent, data appended to Excel/DB.
+**Edit `.env`**:
 
-## Database Schema
-
-```sql
--- leads
-CREATE TABLE leads (
-    id INTEGER PRIMARY KEY,
-    name TEXT, phone TEXT, email TEXT, requirement TEXT,
-    status TEXT DEFAULT &#39;not_contacted&#39;,
-    score INTEGER, lead_type TEXT,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
-
--- messages
-CREATE TABLE messages (
-    id INTEGER PRIMARY KEY,
-    lead_id INTEGER, message TEXT,
-    timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
+```
+GROQ_API_KEY=your_key
+GMAIL_TOKEN_PATH=./Gmail_API_Setup/token.json
+GMAIL_CREDENTIALS_PATH=./Gmail_API_Setup/credentials.json
+FROM_EMAIL=me
 ```
 
-## AI Scoring Logic
+2. **Gmail Setup** (one-time):
 
-- Analyzes replies for: requirement clarity, budget/timeline mentions, intent.
-- Score: +2 per positive factor, -2 for low interest.
-- Output: JSON with classification.
+```
+python Gmail_API_Setup/first.py  # Browser OAuth → token.json
+```
 
-## Notes
+3. **Database**:
 
-- Hardcoded paths (e.g., Excel); update as needed.
-- Run `python app.py` in loop for continuous input.
-- For production: Add env vars, error handling, web UI.
+```
+python migrate_db.py  # Adds new columns safely
+```
 
-## Troubleshooting
+4. **Run Full Stack** (3 terminals):
 
-- Gmail errors: Refresh `token.json` with `first.py`.
-- LLM: Check `GROQ_API_KEY`.
-- Excel: Ensure `openpyxl` installed.
+```
+# Terminal 1: API Server
+uvicorn fastapi_app:app --reload
+# http://localhost:8000/docs
+
+# Terminal 2: Dashboard
+streamlit run dashboard.py
+# http://localhost:8501
+
+# Terminal 3: Automation
+python scheduler.py  # Runs forever, checks every 30min
+```
+
+## API Usage
+
+**Swagger**: `http://localhost:8000/docs`
+
+```
+# Create Lead + Auto Email
+curl -X POST "http://localhost:8000/leads" \\
+  -H "Content-Type: application/json" \\
+  -d '{"name":"John Doe","phone":"1234567890","email":"john@test.com","requirement":"Web app"}'
+
+# List Leads
+curl http://localhost:8000/leads
+
+# Lead + Replies
+curl http://localhost:8000/leads/1
+curl http://localhost:8000/leads/1/replies
+
+# Manual Follow-up
+curl -X POST http://localhost:8000/leads/1/followup
+```
+
+## AI Lead Scoring
+
+**Input**: Gmail reply text  
+**Output**: Strict Pydantic JSON
+
+```json
+{
+  "requirement_clarity": "Clear",
+  "budget_mentioned": "Yes",
+  "timeline_mentioned": "No",
+  "intent": "Serious",
+  "score": 6,
+  "classification": "Good"
+}
+```
+
+**Logic**: +2 budget/timeline/clear/serious, -2/4 negatives → Good(≥6)/Maybe/Not Interested
+
+## Follow-up Decision Engine
+
+| Condition           | Action   |
+| ------------------- | -------- |
+| Just replied        | Wait     |
+| Good + 48h no reply | Proposal |
+| Maybe + 24h         | Nurture  |
+| 72h no activity     | Reminder |
+| Not Interested/5+   | Archive  |
+
+## Dashboard (localhost:8501)
+
+- Leads table: scores/status/time/metrics
+- **Lead Detail**: JSON score, manual refresh/execute
+- Global recent replies
+- Test followup trigger
+
+## Database (Company.db)
+
+**Enhanced Schema**:
+
+```
+leads: id,name,email,requirement,status,score,type,last_contacted/replied,followup_count,thread_id,ai_score(JSON),classification
+messages: lead_id,message,direction(sent/received),timestamp
+```
+
+## New Project Structure
+
+```
+├── fastapi_app.py     # API server
+├── dashboard.py       # Streamlit UI
+├── scheduler.py       # Automation
+├── config.py          # .env loader
+├── models.py          # SQLAlchemy
+├── utils/             # gmail.py, scoring.py
+├── core/              # followup_engine.py
+├── Company.db
+├── requirements.txt
+├── .env.example
+└── TODO.md            # Progress tracker
+```
+
+**Deprecated** (safe to delete): `app.py`, `excel_ops/`, `LeadResponse/`, `Gmail_API_Setup/sendMessage.py`
+
+## End-to-End Test
+
+```
+1. curl POST /leads → Email sent, DB row created
+2. Reply to Gmail email
+3. Dashboard → See reply → Score updates to "Good"
+4. scheduler.py runs → Auto sends Proposal template
+5. Dashboard shows followup_count=1, new message
+```
+
+## Prerequisites / Troubleshooting
+
+| Issue         | Fix                                         |
+| ------------- | ------------------------------------------- |
+| Import errors | `pip install -r requirements.txt`           |
+| Gmail auth    | `python Gmail_API_Setup/first.py`           |
+| No token.json | Enable Gmail API, download credentials.json |
+| Groq fails    | Check key/quota at console.groq.com         |
+| DB locked     | Kill Python processes                       |
+| Windows paths | Use forward slashes in .env                 |
+
+## Next Level (Production)
+
+- Docker Compose (API + scheduler + Redis)
+- PostgreSQL + Alembic migrations
+- Celery tasks + rate limits
+- Webhooks for instant reply processing
+- Multi-user auth (JWT)
+- Lead export CSV/PDF

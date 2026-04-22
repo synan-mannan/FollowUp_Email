@@ -5,3 +5,9 @@ token.json
 credentials.json
 
 __pycache__
+excel_path
+
+.env
+
+Company.db
+.vscode
