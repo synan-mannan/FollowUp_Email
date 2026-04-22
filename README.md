@@ -14,13 +14,13 @@ Dashboard (Streamlit) + API (FastAPI)
 
 ## Features
 
-- ✅ **API First**: Create leads, auto-send initial email, list/view
-- ✅ **Gmail Full**: Send templates, read recent replies/threads
-- ✅ **AI Strict JSON**: Groq LLM scores (clarity/budget/timeline/intent/score/classification)
-- ✅ **Smart Follow-ups**: Time-based + score-driven (proposal/nurture/reminder)
-- ✅ **Automation**: Background scheduler runs pipeline continuously
-- ✅ **Dashboard**: Real-time leads table, manual controls, test scoring
-- ✅ **No Manual Steps**: End-to-end connected pipeline
+- **API First**: Create leads, auto-send initial email, list/view
+- **Gmail Full**: Send templates, read recent replies/threads
+- **AI Strict JSON**: Groq LLM scores (clarity/budget/timeline/intent/score/classification)
+- **Smart Follow-ups**: Time-based + score-driven (proposal/nurture/reminder)
+- **Automation**: Background scheduler runs pipeline continuously
+- **Dashboard**: Real-time leads table, manual controls, test scoring
+- **No Manual Steps**: End-to-end connected pipeline
 
 ## Quick Start (Windows)
 
@@ -170,12 +170,3 @@ messages: lead_id,message,direction(sent/received),timestamp
 | Groq fails    | Check key/quota at console.groq.com         |
 | DB locked     | Kill Python processes                       |
 | Windows paths | Use forward slashes in .env                 |
-
-## Next Level (Production)
-
-- Docker Compose (API + scheduler + Redis)
-- PostgreSQL + Alembic migrations
-- Celery tasks + rate limits
-- Webhooks for instant reply processing
-- Multi-user auth (JWT)
-- Lead export CSV/PDF
