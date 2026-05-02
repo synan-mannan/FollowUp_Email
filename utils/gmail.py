@@ -7,6 +7,7 @@ from datetime import datetime, timedelta
 from google.auth.transport.requests import Request
 from config import settings
 from typing import Dict, List, Any
+from langchain_core.prompts import PromptTemplate
 
 SCOPES = [
     "https://www.googleapis.com/auth/gmail.modify",
@@ -66,10 +67,67 @@ Regards,
 Syed"""
 }
 
+template = PromptTemplate(
+    input_variables=[
+        "lead_name",
+        "company_detail",
+        "company_intro",
+        "services",
+        "lead_requirement"
+    ],
+    template="""
+You are an AI assistant that writes professional, friendly, and concise business follow-up emails.
+
+Generate a personalized email using the following inputs:
+
+Lead Name:
+{lead_name}
+
+Company Detail:
+{company_detail}
+
+Company Intro:
+{company_intro}
+
+Services:
+{services}
+
+Lead Requirement:
+{lead_requirement}
+
+Instructions:
+- Start with a friendly greeting using the lead’s name (e.g., "Hi {lead_name},").
+- Briefly introduce the company in 1 natural sentence using the company intro + company detail.
+- Mention only the most relevant services based on the lead’s requirement (avoid listing everything).
+- Clearly acknowledge and reference the lead’s requirement.
+
+- Based on the services offered and the lead’s requirement, intelligently generate 1–3 relevant qualification questions that help better understand the lead’s needs, scope, or constraints.
+- The questions should feel natural, specific, and contextual (not generic).
+- Do NOT explicitly label them as "qualification questions"; integrate them smoothly into the email.
+
+- Keep the tone conversational, human, and approachable (not robotic or overly formal).
+- Keep the email concise (5–8 lines max).
+- Avoid repetition and generic phrases.
+- End with a polite and professional closing.
+
+Output only the email text.
+"""
+)
+
+our_company_details = "Our company provides various services starting from full stack projects to custom softwares"
+company_intro = "Our company coirei have excellence in providing all kinds of engineering products and solutions which are related to softwares"
+
+from LeadResponse.llm import getllm
+
 def send_email(template_key: str, to_email: str, name: str, requirement: str, services: str = None, **kwargs) -> Dict[str, str]:
     """Send templated email, return thread_id/message_id."""
     service = get_gmail_service()
-    body = TEMPLATES[template_key].format(name=name, requirement=requirement, services=services or settings.lead_services, **kwargs)
+    if (template_key == "initial"):
+        llm = getllm()
+        prompt = template.format(lead_name = name, company_detail = our_company_details, company_intro = company_intro, service=services, lead_requirement = requirement  )
+        body = llm.invoke(prompt)
+    if not (body):
+        body = TEMPLATES[template_key].format(name=name, requirement=requirement, services=services or settings.lead_services, **kwargs)
     
     message = MIMEText(body)
     message['to'] = to_email

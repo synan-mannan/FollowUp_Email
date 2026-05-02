@@ -22,6 +22,7 @@ class Lead(Base):
     ai_score = Column(JSON, nullable=True)
     classification = Column(String(50), nullable=True)
     created_at = Column(DateTime, default=func.now())
+    company_id = Column(Integer, ForeignKey("companies.id"), index = True)
 
 class Message(Base):
     __tablename__ = "messages"
@@ -31,4 +32,17 @@ class Message(Base):
     message = Column(Text)
     direction = Column(String(20), default="sent")  # sent / received
     timestamp = Column(DateTime, default=func.now())
+
+class companies(Base):
+     __tablename__ = "companies"
+
+     id = Column(Integer, primary_key=True, autoincrement=True)
+     company_name = Column(Text)
+     industry = Column(Text)
+     services = Column(Text)
+     intro_message = Column(Text)
+     qualification_questions = Column(Text)
+     pricing_notes = Column(Text)
+     preferred_channel = Column(Text)
+     created_at = Column(DateTime, default=func.now())
 

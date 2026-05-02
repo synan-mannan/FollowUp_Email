@@ -1,0 +1,173 @@
+Good work on V2.
+
+Now we move from MVP to Product-Level Architecture.
+
+Current system works technically, but now it needs to become a real client-ready AI Follow-up Agent product.
+
+Your next task is to work on “Multi-Client + Company Knowledge + Better Lead Qualification”.
+
+---
+
+Objective:
+
+Make the system usable for multiple businesses, where each business can have its own:
+
+* company details
+* services
+* qualification questions
+* follow-up style
+* lead handling rules
+
+Instead of one fixed system for everyone.
+
+---
+
+Step 1: Company Profile Table
+
+Create a new table:
+
+company_profiles
+
+Fields:
+
+* id
+* company_name
+* industry
+* services (JSON/text)
+* intro_message
+* qualification_questions (JSON)
+* pricing_notes
+* preferred_channel (email / whatsapp / call)
+* created_at
+
+This should act as the “brain” of the AI agent for each company.
+
+---
+ Step 2: Link Leads to Company
+
+Update leads table:
+
+Add:
+
+* company_id (foreign key)
+
+Every lead must belong to one company.
+
+This is required for multi-client support.
+
+---
+
+ Step 3: Dynamic Message Generation
+
+Current emails are generic.
+
+Update system so messages are generated using:
+
+* company intro
+* services
+* lead requirement
+* qualification questions
+
+Example:
+
+“Hi John, this is from Coirei. We help businesses with AI solutions and web development. You mentioned you are looking for a web app. Can you share more details about your requirement?”
+
+Do not hardcode messages.
+
+Use DB/JSON driven responses.
+
+---
+
+Step 4: Better Lead Qualification
+
+Current scoring is basic.
+
+Improve scoring using:
+
+* budget clarity
+* timeline urgency
+* seriousness of requirement
+* response speed
+* reply quality
+* repeated engagement
+
+Classification:
+
+* Good Lead
+* Maybe
+* Not Interested
+
+Store detailed reason also.
+
+Example:
+“Good Lead because budget mentioned + urgent timeline + clear requirement”
+
+Not just score.
+
+---
+
+ Step 5: Follow-up Rules Per Company
+
+Different companies need different follow-ups.
+
+Example:
+
+Education:
+
+* fee reminders
+* installment payment reminders
+
+Service Business:
+
+* proposal follow-up
+* sales qualification
+
+Create configurable follow-up rules based on company type.
+
+Do not keep one static flow.
+
+---
+
+Step 6: Dashboard Upgrade
+
+Dashboard should show:
+
+* company-wise leads
+* classification summary
+* hot leads first
+* follow-up pending leads
+* conversion-focused view
+
+Think from business owner perspective, not developer perspective.
+
+---
+
+Step 7: Prepare for WhatsApp Integration
+
+Even if not fully implemented:
+
+Create architecture so WhatsApp can be plugged in easily later.
+
+Do not tightly couple everything only to Gmail.
+
+Need scalable structure.
+
+---
+
+ Expected Output:
+
+* Updated DB schema
+* Dynamic company-driven messages
+* Better qualification logic
+* Improved dashboard structure
+* Cleaner product architecture
+
+---
+
+Important:
+
+Do not overcomplicate with unnecessary AI.
+
+Focus on:
+structure + scalability + business usability
+This should start looking like a real SaaS product, not just a technical demo.

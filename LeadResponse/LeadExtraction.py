@@ -2,6 +2,7 @@ import pandas as pd
 import sqlite3
 from langchain_core.prompts import PromptTemplate
 from llm import getllm
+import re
 
 df = pd.read_json("C:/Users/syedm/Synelime/coirei/FollowUp_Email/LeadResponse/leadsData.json")
 
@@ -68,7 +69,6 @@ Customer Message:
 )
 
 import json
-import re
 
 leadInfo = {}
 
